@@ -8,7 +8,7 @@ set -e
 # Constants
 NOCO_HOME="./nocodb"
 CURRENT_PATH=$(pwd)
-REQUIRED_PORTS=(80 443)
+REQUIRED_PORTS=(8080 8443)
 
 # Color definitions
 RED='\033[0;31m'
