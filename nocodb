@@ -799,7 +799,7 @@ EOF
     command:
       - "--api.insecure=true"
       - "--providers.docker=true"
-      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.address=:8080"
       - "--providers.docker.exposedByDefault=false"
 EOF
 	# In Traefik we need to add the minio entrypoint if it is enabled
@@ -812,7 +812,7 @@ EOF
 	# If SSL is enabled we need to add the following lines to the traefik service
 	if [ "$CONFIG_SSL_ENABLED" = "Y" ] || [ "$CONFIG_MINIO_SSL_ENABLED" = "Y" ]; then
 		cat >>"$compose_file" <<EOF
-      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.address=:8443"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencrypt.acme.email=$(generate_contact_email "$CONFIG_DOMAIN_NAME" "$CONFIG_MINIO_DOMAIN_NAME")"
@@ -823,7 +823,7 @@ EOF
 	cat >>"$compose_file" <<EOF
     ports:
       - "8080:80"
-      - "443:443"
+      - "8443:443"
       - "9000:9000"
     depends_on:
       - nocodb
